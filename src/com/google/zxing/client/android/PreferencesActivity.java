@@ -51,10 +51,12 @@ public final class PreferencesActivity extends PreferenceActivity
   public static final String KEY_HELP_VERSION_SHOWN = "preferences_help_version_shown";
   public static final String KEY_NOT_OUR_RESULTS_SHOWN = "preferences_not_out_results_shown";
 
+  public static final String KEY_STARTUP_HELP = "preferences_autorun_help";
+  
   private CheckBoxPreference decode1D;
   private CheckBoxPreference decodeQR;
   private CheckBoxPreference decodeDataMatrix;
-
+  
   @Override
   protected void onCreate(Bundle icicle) {
     super.onCreate(icicle);

@@ -20,15 +20,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 /**
  * An HTML-based help screen with Back and Done buttons at the bottom.
@@ -61,15 +64,24 @@ public final class HelpActivity extends Activity {
   private static boolean initialized = false;
   private WebView webView;
   private Button backButton;
-
+  private CheckBox chkbox;
+  
+ 	  
   private final Button.OnClickListener backListener = new Button.OnClickListener() {
     public void onClick(View view) {
+    	
       webView.goBack();
     }
   };
 
+  private void save_preference(){
+  	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+  	prefs.edit().putBoolean(PreferencesActivity.KEY_STARTUP_HELP, chkbox.isChecked() ).commit();  	  	  
+  }
+  
   private final Button.OnClickListener doneListener = new Button.OnClickListener() {
-    public void onClick(View view) {
+    public void onClick(View view) {	
+      save_preference();
       finish();
     }
   };
@@ -112,7 +124,11 @@ public final class HelpActivity extends Activity {
     backButton.setOnClickListener(backListener);
     View doneButton = findViewById(R.id.done_button);
     doneButton.setOnClickListener(doneListener);
+    chkbox = (CheckBox) findViewById(R.id.startup_chkbox);
 
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    chkbox.setChecked(prefs.getBoolean(PreferencesActivity.KEY_STARTUP_HELP, false));
+    	
     if (!initialized) {
       initialized = true;
       checkBuggyDevice();
@@ -136,6 +152,7 @@ public final class HelpActivity extends Activity {
     }
   }
 
+  
   @Override
   protected void onSaveInstanceState(Bundle state) {
     String url = webView.getUrl();

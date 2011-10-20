@@ -154,6 +154,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     setContentView(R.layout.capture);
 
+    
     CameraManager.init(getApplication());
     viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
     resultView = findViewById(R.id.result_view);
@@ -166,7 +167,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     inactivityTimer = new InactivityTimer(this);
     beepManager = new BeepManager(this);
 
-    showHelpOnFirstLaunch();
+    showHelpOnLaunch();
   }
 
   @Override
@@ -600,7 +601,27 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
     return false;
   }
-
+  private boolean showHelpOnLaunch() {
+	    try {
+	      PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME, 0);
+	      
+	      this.versionName = info.versionName;
+	      SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	      if(prefs.getBoolean(PreferencesActivity.KEY_STARTUP_HELP, false))
+	       {
+	        Intent intent = new Intent(this, HelpActivity.class);
+	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+	        // Show the default page on a clean install, and the what's new page on an upgrade.
+	        String page =  HelpActivity.DEFAULT_PAGE;
+	        intent.putExtra(HelpActivity.REQUESTED_PAGE_KEY, page);
+	        startActivity(intent);
+	        return true;
+	      }
+	    } catch (PackageManager.NameNotFoundException e) {
+	      Log.w(TAG, e);
+	    }
+	    return false;
+	  }
   private void initCamera(SurfaceHolder surfaceHolder) {
     try {
       CameraManager.get().openDriver(surfaceHolder);
