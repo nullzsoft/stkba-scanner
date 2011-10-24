@@ -31,27 +31,20 @@ import android.view.View;
  *
  * @author dswitkin@google.com (Daniel Switkin)
  */
-public final class ProductResultHandler extends ResultHandler {
+public final class ProductHistoryHandler extends ResultHandler {
+
   private static final int[] buttons = {
       R.string.button_product_search,
       R.string.button_web_search,
       R.string.button_custom_product_search
   };
-
-  public ProductResultHandler(Activity activity, ParsedResult result, Result rawResult) {
-    super(activity, result, rawResult);
-    showGoogleShopperButton(new View.OnClickListener() {
-      public void onClick(View view) {
-        ProductParsedResult productResult = (ProductParsedResult) getResult();
-        openGoogleShopper(productResult.getNormalizedProductID());
-      }
-    });
-    
+  public ProductHistoryHandler(Activity activity, ParsedResult result, Result rawResult) {
+    super(activity, result, rawResult);    
   }
 
   @Override
   public int getButtonCount() {
-    return hasCustomProductSearch() ? buttons.length : buttons.length - 1;
+    return  buttons.length ;
   }
 
   @Override

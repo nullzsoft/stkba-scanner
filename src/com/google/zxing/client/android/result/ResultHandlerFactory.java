@@ -32,6 +32,11 @@ public final class ResultHandlerFactory {
   private ResultHandlerFactory() {
   }
 
+  public static ResultHandler makeResultHistoryHandler(Activity activity, Result rawResult) {
+	  ParsedResult result = parseResult(rawResult);
+	  return new ProductHistoryHandler(activity, result, rawResult);
+  }
+  
   public static ResultHandler makeResultHandler(Activity activity, Result rawResult) {
     ParsedResult result = parseResult(rawResult);
     ParsedResultType type = result.getType();

@@ -23,18 +23,18 @@ import android.content.Context;
 /**
  * @author Sean Owen
  */
-final class DBHelper extends SQLiteOpenHelper {
+public final class DBHelper extends SQLiteOpenHelper {
 
   private static final int DB_VERSION = 4;
   private static final String DB_NAME = "barcode_scanner_history.db";
-  static final String TABLE_NAME = "history";
-  static final String ID_COL = "id";
-  static final String TEXT_COL = "text";
-  static final String FORMAT_COL = "format";
-  static final String DISPLAY_COL = "display";
-  static final String TIMESTAMP_COL = "timestamp";
+  public static final String TABLE_NAME = "history";
+  public static final String ID_COL = "id";
+  public static final String TEXT_COL = "text";
+  public static final String FORMAT_COL = "format";
+  public static final String DISPLAY_COL = "display";
+  public static final String TIMESTAMP_COL = "timestamp";
 
-  DBHelper(Context context) {
+  public DBHelper(Context context) {
     super(context, DB_NAME, null, DB_VERSION);
   }
 

@@ -15,7 +15,7 @@
  limitations under the License.
  -->
 <resources>
-  <string name="app_name">Barcode Scanner</string>
+  <string name="app_name">STKBA Scanner</string>
   <string name="app_picker_name">Applications</string>
   <string name="bookmark_picker_name">Bookmarks</string>
   <string name="button_add_calendar">Add to calendar</string>
@@ -61,7 +61,7 @@
   <string name="menu_history">History</string>
   <string name="menu_settings">Settings</string>
   <string name="menu_share">Share</string>
-  <string name="msg_about">The official Android app of the open source ZXing barcode project.</string>
+  <string name="msg_about">STKBA BARCODE SCANNER</string>
   <string name="msg_buggy">This device has known bugs that cause barcode scanning problems. For more information, visit http://code.google.com/p/zxing/wiki/FrequentlyAskedQuestions</string>
   <string name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
   <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
@@ -127,7 +127,7 @@
   <string name="result_wifi">Found WLAN Configuration</string>
   <string name="sbc_name">Google Book Search</string>
   <string name="share_name">Share via barcode</string>
-  <string name="title_about">Barcode Scanner v</string>
+  <string name="title_about">STKBA Barcode Scanner v</string>
   <string name="wa_name">WLAN Connection</string>
   <string name="wifi_changing_network">Changing Network</string>
   <string name="wifi_connected">Connected</string>
@@ -142,4 +142,9 @@
   <string name="preferences_autorun_help">StartUp Help</string>
   <string name="preferences_autorun_help_summary">Help on Start Up</string>
   <string name="preferences_autorun_help_title">StartUp Help</string>
+  <string name="button_prev">Prev</string>
+  <string name="button_next">Next</string>
+  <string name="button_send_history">SEND</string>
+  <string name="button_delete_history">DELETE</string>
+
 </resources>

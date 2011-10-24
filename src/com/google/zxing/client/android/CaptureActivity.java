@@ -310,8 +310,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         break;
       }
       case HISTORY_ID: {
+    	  /*
         AlertDialog historyAlert = historyManager.buildAlert();
         historyAlert.show();
+        */
+          Intent intent = new Intent(Intent.ACTION_VIEW);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+          intent.setClassName(this, HistoryActivity.class.getName());
+          startActivity(intent);
         break;
       }
       case SETTINGS_ID: {
@@ -332,9 +338,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.title_about) + versionName);
         builder.setMessage(getString(R.string.msg_about) + "\n\n" + getString(R.string.zxing_url));
-        builder.setIcon(R.drawable.launcher_icon);
-        builder.setPositiveButton(R.string.button_open_browser, aboutListener);
-        builder.setNegativeButton(R.string.button_cancel, null);
+//        builder.setMessage(getString(R.string.msg_about) + "\n\n" + getString(R.string.zxing_url));
+//        builder.setIcon(R.drawable.launcher_icon);
+//        builder.setPositiveButton(R.string.button_open_browser, aboutListener);
+        builder.setNegativeButton(R.string.button_ok, null);
         builder.show();
         break;
     }
@@ -366,12 +373,13 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     inactivityTimer.onActivity();
     lastResult = rawResult;
     ResultHandler resultHandler = ResultHandlerFactory.makeResultHandler(this, rawResult);
-    historyManager.addHistoryItem(rawResult, resultHandler);
 
     if (barcode == null) {
       // This is from history -- no saved barcode
       handleDecodeInternally(rawResult, resultHandler, null);
     } else {
+    	
+      historyManager.addHistoryItem(rawResult, resultHandler);	
       beepManager.playBeepSoundAndVibrate();
       drawResultPoints(barcode, rawResult);
       switch (source) {
@@ -389,7 +397,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         case NONE:
           SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
           if (prefs.getBoolean(PreferencesActivity.KEY_BULK_MODE, false)) {
-            Toast.makeText(this, R.string.msg_bulk_mode_scanned, Toast.LENGTH_SHORT).show();
+        	
+            Toast.makeText(this, R.string.msg_bulk_mode_scanned + " " + barcode, Toast.LENGTH_SHORT).show();
             // Wait a moment or else it will scan the same barcode continuously about 3 times
             if (handler != null) {
               handler.sendEmptyMessageDelayed(R.id.restart_preview, BULK_MODE_SCAN_DELAY_MS);

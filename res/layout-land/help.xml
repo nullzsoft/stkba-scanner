@@ -40,12 +40,12 @@
     <Button android:id="@+id/back_button"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="@string/button_back" android:layout_weight="0.85"/>
+            android:text="@string/button_back" android:layout_weight="0.48"/>
     <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_autorun_help" android:layout_weight="0.24" android:id="@+id/startup_chkbox" android:checked="true"></CheckBox>
 
     <Button android:id="@+id/done_button"
             android:layout_height="wrap_content"
-            android:text="@string/button_done" android:layout_width="wrap_content"/>
+            android:text="@string/button_done" android:layout_width="wrap_content" android:layout_weight="0.12"/>
 
   </LinearLayout>
 
